@@ -1,22 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
     <title>Show Recipe</title>
 </head>
 <body>
-<div class="container-fluid">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+<div class="container-fluid my-md-5">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title" th:text="${recipe.getDescription()}">My Recipes</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3"><h3>Categories</h3></div>
+                        <div class="col-md-3">
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item" th:each="category : ${recipe.getCategories()}"
+                                    th:text="${category.getDescription()}">E sor cucc
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row my-md-1">
+                        <div class="col-md-3"><h3>Preparation Time:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><p th:text="${recipe.getPrepTime()}+' min'"></p>
+                        </div>
+                        <div class="col-md-3"><h3>Difficulty:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><p th:text="${recipe.getDifficulty()}"></p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><h3>Cook Time:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><p th:text="${recipe.getCookTime()}+' min'"></p>
+                        </div>
+                        <div class="col-md-3"><h3>Servings:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><p th:text="${recipe.getServings()}"></p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><h3>Source:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><p th:text="${recipe.getSource()}"></p></div>
+                        <div class="col-md-3"><h3>URL:</h3></div>
+                        <div class="col-md-3" style="margin-top: 0.5%"><a th:href="${recipe.getUrl()}">Check this on
+                            other site</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
+    <div class="row my-md-4" >
+        <div class="col-md-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Ingredients</h1>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <ol class="list-group">
+                            <li class="list-group-item" th:each="ingredient : ${recipe.getIngredients()}"
+                                th:text="${
+                                ingredient.getAmount()+' '+ingredient.getUom().getDescription()+' '+ingredient.getDescription()}">
+                                Hozzája való
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-md-4">
+        <div class="col-md-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Directions</h1>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <p th:text="${recipe.getDirections()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-md-4">
+        <div class="col-md-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Directions</h1>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <p th:text="${recipe.getNotes().getRecipeNotes()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"
+        th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
