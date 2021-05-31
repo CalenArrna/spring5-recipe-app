@@ -10,7 +10,9 @@ public interface RecipeService {
 
     Set<Recipe> getRecipes();
 
-    Recipe getRecipeById(Long id);
+    Recipe findRecipeById(Long id);
+
+    RecipeCommand findCommandById(Long id);
 
     RecipeCommand saveRecipeCommand (RecipeCommand command);
 }

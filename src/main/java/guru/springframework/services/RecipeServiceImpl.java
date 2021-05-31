@@ -37,9 +37,15 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipeById(Long id) {
+    public Recipe findRecipeById(Long id) {
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         return optionalRecipe.orElseThrow(() ->new RuntimeException("Recipe not found!"));
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findRecipeById(id));
     }
 
     @Override

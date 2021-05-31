@@ -87,7 +87,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-
+                        <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                            <li th:each="ingredient : ${recipe.ingredients}"
+                                th:text="${(ingredient.getAmount() +
+                                        ' ' + ingredient.uom.getDescription() +
+                                        ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
