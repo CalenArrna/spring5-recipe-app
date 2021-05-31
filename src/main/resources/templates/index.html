@@ -24,6 +24,7 @@
                                 <th>Description</th>
                                 <th>View</th>
                                 <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tr th:each="recipe : ${recipes}">
@@ -31,6 +32,7 @@
                                 <td th:text="${recipe.description}">Tasty Goodnees</td>
                                 <td><a th:href="@{'/recipe/' + ${recipe.getId()} +'/show'}">View</a></td>
                                 <td><a th:href="@{'/recipe/' + ${recipe.getId()} +'/update'}">Update</a></td>
+                                <td><a th:href="@{'/recipe/' + ${recipe.getId()} +'/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>
