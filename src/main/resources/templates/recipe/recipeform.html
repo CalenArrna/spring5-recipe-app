@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Recipe Form</title>
+</head>
+<body>
+<div class="container-fluid my-md-5">
+    <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Edit Recipe Information</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"><h3>Recipe Description</h3></div>
+                            <div class="col-md-3">
+                                <label for="recipeDescription" class="form-label">Recipe Description:</label>
+                                <input type="text" class="form-control" id="recipeDescription" placeholder="My Recipe"
+                                       th:field="*{description}">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 0.5%">
+                            <div class="col-md-3"><h3>Categories</h3></div>
+                            <div class="col-md-3">
+                                <input type="checkbox" class="form-check-input" id="categories">
+                                <label class="form-check-label" for="categories">Category 1</label>
+                            </div>
+                        </div>
+                        <div class="row my-md-1" style="margin-top: 0.5%">
+                            <div class="col-md-3">
+                                <label for="prepTime" class="form-label">Preparation Time:</label>
+                                <input type="number" class="form-control" id="prepTime" th:field="*{prepTime}">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="cookTime" class="form-label">Cook Time:</label>
+                                <input type="number" class="form-control" id="cookTime" th:field="*{cookTime}">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="difficulty" class="form-label">Difficulty:</label>
+                                <select class="form-select" aria-label="Default select example" id="difficulty">
+                                    <option selected>Select Difficulty</option>
+                                    <option value="1">EASY</option>
+                                    <option value="2">MODERATE</option>
+                                    <option value="3">HARD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 0.5%">
+                            <div class="col-md-3">
+                                <label for="servings" class="form-label">Servings:</label>
+                                <input type="number" class="form-control" id="servings" th:field="*{servings}">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="source" class="form-label">Source:</label>
+                                <input type="text" class="form-control" id="source" th:field="*{source}">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="url" class="form-label">URL:</label>
+                                <input type="url" class="form-control" id="url" th:field="*{url}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-md-4">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h1 class="card-title">Ingredients</h1>
+                            </div>
+                            <div class="col-md-1">
+                                <a class="btn btn-outline-primary" href="#" role="button">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-md-4">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Directions</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="directions" class="form-label"></label>
+                                <textarea class="form-control" id="directions" rows="5"
+                                          th:field="*{directions}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-md-4">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Notes</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="notes" class="form-label"></label>
+                                <textarea class="form-control" id="notes" rows="5"
+                                          th:field="*{notes.recipeNotes}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 offset-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"
+        th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
