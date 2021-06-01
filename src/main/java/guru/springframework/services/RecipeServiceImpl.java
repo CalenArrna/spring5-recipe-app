@@ -62,6 +62,6 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
-        log.debug("!!!!     After Deleteing ID: " +id);
+        log.debug("!!!!     After Deleteing ID: " +id +"     !!!!!!!!");
     }
 }
