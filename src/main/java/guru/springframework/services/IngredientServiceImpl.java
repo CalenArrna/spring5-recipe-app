@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -43,8 +42,7 @@ public class IngredientServiceImpl implements IngredientService {
 
         Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
                 .filter(ingredient -> ingredient.getId().equals(ingredientId))
-                .map(ingredientToIngredientCommand::convert)
-                .findFirst();
+                .map( ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
 
         if(!ingredientCommandOptional.isPresent()){
             //todo impl error handling
@@ -82,7 +80,7 @@ public class IngredientServiceImpl implements IngredientService {
                         .orElseThrow(() -> new RuntimeException("UOM NOT FOUND"))); //todo address this
             } else {
                 //add new Ingredient
-                recipe.addIngredient(Objects.requireNonNull(ingredientCommandToIngredient.convert(command)));
+                recipe.addIngredient(ingredientCommandToIngredient.convert(command));
             }
 
             Recipe savedRecipe = recipeRepository.save(recipe);
