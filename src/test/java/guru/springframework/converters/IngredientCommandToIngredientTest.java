@@ -4,8 +4,11 @@ import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import guru.springframework.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 
@@ -20,9 +23,13 @@ class IngredientCommandToIngredientTest {
 
     IngredientCommandToIngredient converter;
 
+    @Mock
+    RecipeRepository recipeService;
+
     @BeforeEach
     void setUp() {
-        converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
+        MockitoAnnotations.initMocks(this);
+        converter = new IngredientCommandToIngredient(recipeService, new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
 

@@ -28,6 +28,7 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeCommandToRecipe = recipeCommandToRecipe;
     }
 
+
     @Override
     public Set<Recipe> getRecipes() {
         log.debug("I'm in the ServiceImpl");

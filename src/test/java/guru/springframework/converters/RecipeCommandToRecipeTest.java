@@ -6,8 +6,11 @@ import guru.springframework.commands.NotesCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Recipe;
+import guru.springframework.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,11 +32,15 @@ class RecipeCommandToRecipeTest {
 
     RecipeCommandToRecipe converter;
 
+    @Mock
+    RecipeRepository recipeService;
+
 
     @BeforeEach
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),
-                new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
+                new IngredientCommandToIngredient(recipeService, new UnitOfMeasureCommandToUnitOfMeasure()),
                 new NotesCommandToNotes());
     }
 
