@@ -36,21 +36,21 @@ public class IngredientController {
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/show")
-    public String showIngredient (@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model) {
+    public String showIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model) {
 
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId,ingredientId));
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId));
         return "recipe/ingredient/show";
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/update")
     public String editIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model) {
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId,ingredientId));
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId));
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
         return "recipe/ingredient/ingredientform";
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/new")
-    public String newIngredient(@PathVariable Long recipeId, Model model){
+    public String newIngredient(@PathVariable Long recipeId, Model model) {
 
         RecipeCommand recipeCommand = recipeService.findCommandById(recipeId);
         if (recipeCommand == null) throw new RuntimeException("Can't save ingredient to not existing recipe!");
@@ -66,13 +66,21 @@ public class IngredientController {
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command){
+    public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
         log.debug("saved receipe id:" + savedCommand.getRecipeId());
         log.debug("saved ingredient id:" + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId) {
+
+        ingredientService.deleteById(ingredientId);
+
+        return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 
 }
