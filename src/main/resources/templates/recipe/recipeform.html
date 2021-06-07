@@ -16,7 +16,13 @@
             <div class="col-md-8 offset-2">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="card-title">Edit Recipe Information</h1>
+                        <div class="col-md-9">
+                            <h1 class="card-title">Edit Recipe Information</h1>
+                        </div>
+                        <div class="col-md-3">
+                            <a class="btn btn-outline-primary" href="#"
+                               th:href="@{'/recipe/'+${recipe.getId()}+'/image'}" role="button">Change Image</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
