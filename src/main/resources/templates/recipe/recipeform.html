@@ -45,11 +45,10 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="difficulty" class="form-label">Difficulty:</label>
-                                <select class="form-select" aria-label="Default select example" id="difficulty">
-                                    <option selected>Select Difficulty</option>
-                                    <option value="1">EASY</option>
-                                    <option value="2">MODERATE</option>
-                                    <option value="3">HARD</option>
+                                <select class="form-select" id="difficulty" th:field="*{difficulty}">
+                                    <option th:each="difficulty : ${T(guru.springframework.domain.Difficulty).values()}"
+                                    th:value="${difficulty.name()}"
+                                    th:text="${difficulty.name()}">Select Difficulty</option>
                                 </select>
                             </div>
                         </div>
